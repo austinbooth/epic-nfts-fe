@@ -10,8 +10,9 @@ import Mining from '../components/Mining'
 import twitterLogo from '../public/twitter-logo.svg'
 
 // Constants
-const TWITTER_HANDLE = '_buildspace';
+const TWITTER_HANDLE = 'austinbcodes';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
+const BUILDSPACE_TWITTER_HANDLE = '_buildspace';
 const OPENSEA_LINK = '';
 const TOTAL_MINT_COUNT = 5;
 
@@ -195,7 +196,8 @@ const Home: NextPage = () => {
             href={TWITTER_LINK}
             target="_blank"
             rel="noreferrer"
-          >{`built on @${TWITTER_HANDLE}`}</a>
+          >{`built by @${TWITTER_HANDLE}`}</a>
+          <p className="footer-buildspace-attribution-text">{`following a @${BUILDSPACE_TWITTER_HANDLE} project`}</p>
         </div>
       </div>
     </div>

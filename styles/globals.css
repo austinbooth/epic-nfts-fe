@@ -93,6 +93,7 @@ a {
   justify-content: center;
   align-items: center;
   padding-bottom: 30px;
+  gap: 0.25rem;
 }
 
 .twitter-logo {
@@ -101,6 +102,12 @@ a {
 }
 
 .footer-text {
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.footer-buildspace-attribution-text {
   color: white;
   font-size: 16px;
   font-weight: bold;
