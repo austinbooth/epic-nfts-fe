@@ -4,6 +4,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { ethers } from 'ethers'
 import myEpicNft from '../utils/MyEpicNFT.json'
+import Mining from '../components/Mining'
 // import styles from '../styles/Home.module.css'
 
 import twitterLogo from '../public/twitter-logo.svg'
@@ -19,6 +20,7 @@ const CONTRACT_ADDRESS = "0x76C4585Dd5776095219a71131911e696a63dACc5";
 const Home: NextPage = () => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [totalNFTsMintedSoFar, setTotalNFTsMintedSoFar] = useState(0)
+  const [mining, setMining] = useState(false)
   
   const checkIfWalletIsConnected = async () => {
     const { ethereum } = window;
@@ -139,6 +141,7 @@ const Home: NextPage = () => {
         let nftTxn = await connectedContract.makeAnEpicNFT();
   
         console.log("Mining...please wait.")
+        setMining(true)
         await nftTxn.wait();
         console.log(nftTxn);
         console.log(`Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTxn.hash}`);
@@ -148,6 +151,8 @@ const Home: NextPage = () => {
       }
     } catch (error) {
       console.log(error)
+    } finally {
+      setMining(false)
     }
   }
 
@@ -163,10 +168,13 @@ const Home: NextPage = () => {
 
   const renderMintUI = () => (
     <>
-      <p className="sub-text">{`${totalNFTsMintedSoFar}/${TOTAL_MINT_COUNT} tokens minted so far`}</p>
-      <button onClick={askContractToMintNft} className="cta-button connect-wallet-button">
-        Mint NFT
-      </button>
+      <div>
+        <p className="sub-text">{`${totalNFTsMintedSoFar}/${TOTAL_MINT_COUNT} tokens minted so far`}</p>
+        <button onClick={askContractToMintNft} disabled={mining} className="cta-button connect-wallet-button">
+          Mint NFT
+        </button>
+      </div>
+      {mining && <Mining />}
     </>
   )
 
