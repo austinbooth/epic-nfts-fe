@@ -18,13 +18,17 @@ const TOTAL_MINT_COUNT = 50;
 
 const CONTRACT_ADDRESS = "0xEDfc570A92ABD2ABc52283660CBe8d1631385C22";
 
+interface MyWindow extends Window {
+  ethereum: any
+}
+
 const Home: NextPage = () => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [totalNFTsMintedSoFar, setTotalNFTsMintedSoFar] = useState(0)
   const [mining, setMining] = useState(false)
   
   const checkIfWalletIsConnected = async () => {
-    const { ethereum } = window;
+    const { ethereum } = window as unknown as MyWindow;
 
     if (!ethereum) {
         console.log("Make sure you have metamask!");
