@@ -59,7 +59,7 @@ const Home: NextPage = () => {
 
   const connectWallet = async () => {
     try {
-      const { ethereum } = window; // metamask injects the 'ethereum' object into our window object
+      const { ethereum } = window as unknown as MyWindow; // metamask injects the 'ethereum' object into our window object
 
       if (!ethereum) {
         alert("Get MetaMask!");
@@ -88,7 +88,7 @@ const Home: NextPage = () => {
   const setupEventListener = async () => {
     // Most of this looks the same as our function askContractToMintNft
     try {
-      const { ethereum } = window;
+      const { ethereum } = window as unknown as MyWindow;
 
       if (ethereum) {
         // Same stuff again
@@ -125,7 +125,7 @@ const Home: NextPage = () => {
   const askContractToMintNft = async () => {
     setMining(true)
     try {
-      const { ethereum } = window;
+      const { ethereum } = window as unknown as MyWindow;
 
       let chainId = await ethereum.request({ method: 'eth_chainId' });
       console.log("Connected to chain " + chainId);
