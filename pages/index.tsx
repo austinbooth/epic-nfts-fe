@@ -195,7 +195,7 @@ const Home: NextPage = () => {
           {currentAccount === "" ? renderNotConnectedContainer() : renderMintUI()}
         </div>
         <div>
-          <a href={OPENSEA_LINK} target="_blank">
+          <a href={OPENSEA_LINK} target="_blank" rel="noreferrer">
             <button className='cta-button opensea-button'>🌊 View the collection on OpenSea</button>
           </a>
         </div>
