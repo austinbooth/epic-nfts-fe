@@ -13,10 +13,10 @@ import twitterLogo from '../public/twitter-logo.svg'
 const TWITTER_HANDLE = 'austinbcodes';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 const BUILDSPACE_TWITTER_HANDLE = '_buildspace';
-const OPENSEA_LINK = '';
-const TOTAL_MINT_COUNT = 5;
+const OPENSEA_LINK = 'https://testnets.opensea.io/collection/squarenft-tkpfjcp38x';
+const TOTAL_MINT_COUNT = 50;
 
-const CONTRACT_ADDRESS = "0x76C4585Dd5776095219a71131911e696a63dACc5";
+const CONTRACT_ADDRESS = "0xEDfc570A92ABD2ABc52283660CBe8d1631385C22";
 
 const Home: NextPage = () => {
   const [currentAccount, setCurrentAccount] = useState("");
@@ -119,6 +119,7 @@ const Home: NextPage = () => {
   }
 
   const askContractToMintNft = async () => {
+    setMining(true)
     try {
       const { ethereum } = window;
 
@@ -142,7 +143,7 @@ const Home: NextPage = () => {
         let nftTxn = await connectedContract.makeAnEpicNFT();
   
         console.log("Mining...please wait.")
-        setMining(true)
+        
         await nftTxn.wait();
         console.log(nftTxn);
         console.log(`Mined, see transaction: https://rinkeby.etherscan.io/tx/${nftTxn.hash}`);
@@ -188,6 +189,11 @@ const Home: NextPage = () => {
             Each unique. Each beautiful. Discover your NFT today.
           </p>
           {currentAccount === "" ? renderNotConnectedContainer() : renderMintUI()}
+        </div>
+        <div>
+          <a href={OPENSEA_LINK} target="_blank">
+            <button className='cta-button opensea-button'>🌊 View the collection on OpenSea</button>
+          </a>
         </div>
         <div className="footer-container">
           <Image alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
