@@ -209,7 +209,7 @@ const Home: NextPage = () => {
                 target="_blank"
                 rel="noreferrer"
                 className='link'
-              >Here's the link to your new shiny NFT!</a>
+              >Here&apos;s the link to your new shiny NFT!</a>
               }
             </p>
           </div>
