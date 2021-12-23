@@ -197,12 +197,11 @@ const Home: NextPage = () => {
           </p>
           {currentAccount === "" ? renderNotConnectedContainer() : renderMintUI()}
         </div>
-        {newNFT && (
+        {!newNFT && (
           <div>
-            <p className="sub-text">{
-              `Hey there! We've minted your NFT and sent it to your wallet.
-                It may be blank right now. It can take 10 - 15 mins to show up on Rarible.`
-              }
+            <p className="sub-text">
+              Hey there! We&apos;ve minted your NFT and sent it to your wallet.
+              It may be blank right now. It can take 10 - 15 mins to show up on Rarible.
             </p>
             <p className="sub-text">{
               <a
