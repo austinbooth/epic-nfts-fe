@@ -22,10 +22,12 @@ interface MyWindow extends Window {
   ethereum: any
 }
 
+
 const Home: NextPage = () => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [totalNFTsMintedSoFar, setTotalNFTsMintedSoFar] = useState(0)
   const [mining, setMining] = useState(false)
+  const [newNFT, setNewNFT] = useState<number>()
   
   const checkIfWalletIsConnected = async () => {
     const { ethereum } = window as unknown as MyWindow;
@@ -109,7 +111,7 @@ const Home: NextPage = () => {
           console.log(from, tokenId.toNumber())
           const newTotalNFTsMintedSoFar = await connectedContract.getTotalNFTsMintedSoFar()
           setTotalNFTsMintedSoFar(newTotalNFTsMintedSoFar)
-          alert(`Hey there! We've minted your NFT and sent it to your wallet. It may be blank right now. It can take a max of 10 min to show up on Rarible. Here's the link: https://rinkeby.rarible.com/token/${CONTRACT_ADDRESS}:${tokenId.toNumber()}`)
+          setNewNFT(tokenId.toNumber())
         });
 
         console.log("Setup event listener!")
@@ -124,6 +126,7 @@ const Home: NextPage = () => {
 
   const askContractToMintNft = async () => {
     setMining(true)
+    setNewNFT(undefined)
     try {
       const { ethereum } = window as unknown as MyWindow;
 
@@ -194,9 +197,27 @@ const Home: NextPage = () => {
           </p>
           {currentAccount === "" ? renderNotConnectedContainer() : renderMintUI()}
         </div>
+        {newNFT && (
+          <div>
+            <p className="sub-text">{
+              `Hey there! We've minted your NFT and sent it to your wallet.
+                It may be blank right now. It can take 10 - 15 mins to show up on Rarible.`
+              }
+            </p>
+            <p className="sub-text">{
+              <a
+                href={`https://rinkeby.rarible.com/token/${CONTRACT_ADDRESS}:${newNFT}`}
+                target="_blank"
+                rel="noreferrer"
+                className='link'
+              >Here's the link to your new shiny NFT!</a>
+              }
+            </p>
+          </div>
+        )}
         <div>
           <a href={OPENSEA_LINK} target="_blank" rel="noreferrer">
-            <button className='cta-button opensea-button'>🌊 View the collection on OpenSea</button>
+            <button className='cta-button opensea-button'>🌊 View the full collection on OpenSea</button>
           </a>
         </div>
         <div className="footer-container">

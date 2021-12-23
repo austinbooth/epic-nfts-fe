@@ -113,6 +113,10 @@ a {
   font-weight: bold;
 }
 
+.link {
+  color: #35aee2;
+}
+
 /* KeyFrames */
 @-webkit-keyframes gradient-animation {
   0% {
