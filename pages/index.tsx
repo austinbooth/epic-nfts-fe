@@ -197,7 +197,7 @@ const Home: NextPage = () => {
           </p>
           {currentAccount === "" ? renderNotConnectedContainer() : renderMintUI()}
         </div>
-        {!newNFT && (
+        {newNFT && (
           <div>
             <p className="sub-text">
               Hey there! We&apos;ve minted your NFT and sent it to your wallet.
